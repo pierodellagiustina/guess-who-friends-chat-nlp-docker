@@ -1,0 +1,24 @@
+{% extends 'layout.html' %} <!--- inheritance --->
+{% block content %}
+    <!--- print out messages and outcome --->
+    {% for _, row in df.iterrows() %}
+        <!---message--->
+        <b>{{ row.message }}</b><br>
+        <!---outcome--->
+        {% if row.user_pred == 'err' %}
+            Complimenti! Non sei neanche riuscito ad inserire un carattere valido. In ogni caso il mittente era {{ row.sender }}
+            e la Rete Neurale avrebbe scelto {{ row.nn_pred }}<br><br>
+        {% else %}
+            {% if row.sender == row.user_pred %}
+                Ben fatto, era proprio {{ row.sender }}. La Rete Neurale avrebbe scelto {{ row.nn_pred }} <br><br>
+            {% else %}
+                No, pensavi fosse {{ row.user_pred }} ma invece era {{ row.sender }}. La Rete Neurale avrebbe scelto {{ row.nn_pred }}<br><br>
+            {% endif %}
+        {% endif %}
+    {% endfor %}<br><br>
+    Questo giro hai totalizzato <b>{{ score_user }}</b> punti, mentre la Rete Neurale ne ha totalizzati <b>{{ score_nn }}</b><br><br>
+    Ben fatto!<br><br>
+    Il tuo punteggio finora è: <b>{{ cumul_score_user }}/{{ attempts_counter }}</b><br>
+    mentre quello della Rete Neurale è: <b>{{ cumul_score_nn }}/{{ attempts_counter }}</b><br><br>
+    <a href="{{ url_for('index') }}">Riprova</a>
+{% endblock content %}

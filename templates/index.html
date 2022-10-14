@@ -1,0 +1,41 @@
+{% extends 'layout.html' %} <!--- inheritance --->
+{% block content %} <!--- central block with messages displayed --->
+    <center>
+        <p>
+            <br><br>
+            Benvenuto<br><br>
+            Qui di seguito ti verranno presentati dei messaggi presi a caso dalla nostra chat<br><br>
+            Indovina chi sono i mentecatti che hanno scritto sta roba e invia la risposta in fondo.<br><br>
+            Sarai in competizione con una Rete Neurale simile a quella che Borse voleva creare per la sua laurea (LOL).<br><br>
+            Il training della Rete Neurale è stato fatto sui messaggi che ci siamo scambiati negli ultimi 2/3 anni<br><br><br><br>
+            Utilizza i seguenti codici identificativi:<br><br>
+            {% for sender_id in sender_mapper.keys() %}
+                <b>{{ sender_mapper[sender_id] }} : {{ sender_id+1 }}</b><br>
+            {% endfor %}
+            <br><br>
+            Il tuo punteggio finora è: {{ cumul_score_user }}/{{ attempts_counter }}<br><br>
+            mentre quello della Rete Neurale è: {{ cumul_score_nn }}/{{ attempts_counter }}<br><br>
+        </p>
+    </center>
+
+    <!---Refresh the messages--->
+    <form method="POST">
+        <input type="submit" value="Refresha la lista" name="refresh">
+    </form><br><br>
+
+    <!---Print messages and get user prediction--->
+    <form method="POST">
+        <b>
+            {% for m in messages %}
+                {{ loop.index }}) "{{ m }}"
+                <!---Get the input from user--->
+                <input type='text' name="answer_{{loop.index}}"><br><br>
+            {% endfor %}
+        </b>
+        <!---Submit the inputs---->
+        <input type="submit" value="Invio">
+    </form>
+    <br><br><br><br><br><br>
+
+
+{% endblock content %}
