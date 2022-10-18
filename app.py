@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, url_for, redirect, session
 import pandas as pd
-import functionalities.functionalities as f
-import config.config as c
+import functionalities as f
+import config as c
 import json
 
 
@@ -141,5 +141,5 @@ def score(score_user, user_preds, score_nn):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=8000)
 

@@ -1,5 +1,5 @@
 import pandas as pd
-import config.config as c
+import config as c
 import re
 from nltk.tokenize.casual import TweetTokenizer
 import string
