@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, url_for, redirect, session
 import pandas as pd
-import functionalities as f
-import config as c
+import functionalities.functionalities as f
+import config.config as c
 import json
 
 
